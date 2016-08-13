@@ -33,24 +33,24 @@ public class App
         DbxDownloader<FileMetadata> dbxDownloader = client.files().download("/Yan Wang/YW_Private_Keys_v1.kdbx");
         InputStream inputStream = dbxDownloader.getInputStream();
 
-        OutputStream outputStream = new FileOutputStream(new File("YW_Private_Keys_v1.kdbx"));
-
-        byte[] buffer = new byte[1024];
-        int bytesRead;
-        //read from is to buffer
-        while((bytesRead = inputStream.read(buffer)) !=-1) {
-            outputStream.write(buffer, 0, bytesRead);
-        }
-            inputStream.close();
-        //flush OutputStream to write any buffered data to file
-            outputStream.flush();
-            outputStream.close();
-
-        System.out.println(dbxDownloader.getResult().getSize());
+//        OutputStream outputStream = new FileOutputStream(new File("YW_Private_Keys_v1.kdbx"));
+//
+//        byte[] buffer = new byte[1024];
+//        int bytesRead;
+//        //read from is to buffer
+//        while((bytesRead = inputStream.read(buffer)) !=-1) {
+//            outputStream.write(buffer, 0, bytesRead);
+//        }
+//            inputStream.close();
+//        //flush OutputStream to write any buffered data to file
+//            outputStream.flush();
+//            outputStream.close();
+//
+//        System.out.println(dbxDownloader.getResult().getSize());
 
 
         // Open Database
-        KeePassFile database = KeePassDatabase.getInstance("YW_Private_Keys_v1.kdbx").openDatabase("ouafahwafa79");
+        KeePassFile database = KeePassDatabase.getInstance(inputStream).openDatabase("ouafahwafa79");
 
         // Retrieve all entries
         List<Entry> entries = database.getEntries();
